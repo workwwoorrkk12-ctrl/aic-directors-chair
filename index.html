@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIC DIRECTOR'S CHAIR</title>
+<style>
+:root{
+  --bg:#101318; --panel:#171b22; --panel2:#1d222b; --screen:#0b0e12;
+  --line:#2a3039; --line2:#3a414d;
+  --txt:#eae7e0; --mut:#8c94a3; --mut2:#5b6371;
+  --accent:#f0a63c; --accent-dim:#8a6224; --cool:#7fb2d6;
+  --mono:"Cascadia Code","JetBrains Mono",Consolas,"SFMono-Regular",monospace;
+  --sans:"Pretendard Variable",Pretendard,"Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.6}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px 120px}
+
+.slate{height:14px;background:repeating-linear-gradient(-45deg,var(--txt) 0 14px,var(--bg) 14px 28px);opacity:.9}
+header.hero{padding:44px 0 12px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--accent);text-transform:uppercase;margin:0 0 14px}
+h1{font-size:clamp(28px,4vw,44px);margin:0 0 12px;letter-spacing:-.02em;line-height:1.15;text-wrap:balance}
+h1 .en{color:var(--mut2);font-weight:700}
+.lede{max-width:640px;color:var(--mut);font-size:15px;margin:0 0 24px}
+.lede b{color:var(--txt);font-weight:600}
+
+.presets{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:18px 0 26px}
+.presets .lb{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--mut2);margin-right:6px}
+.preset{font-family:var(--sans);font-size:13px;color:var(--txt);background:var(--panel);border:1px solid var(--line2);border-radius:999px;padding:7px 16px;cursor:pointer;transition:border-color .15s,background .15s}
+.preset:hover{border-color:var(--accent);background:var(--panel2)}
+.preset:focus-visible,.card:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:32px;align-items:start}
+
+section.cat{margin:0 0 44px}
+.sec-head{display:flex;gap:14px;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:14px;flex-wrap:wrap}
+.sec-no{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:.1em}
+.sec-head h2{font-size:19px;margin:0;letter-spacing:-.01em}
+.sec-en{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--mut2);text-transform:uppercase}
+.sec-desc{width:100%;margin:2px 0 0;font-size:13px;color:var(--mut)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.card{display:block;width:100%;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:0;cursor:pointer;color:var(--txt);font-family:var(--sans);transition:border-color .15s,transform .1s;position:relative}
+.card:hover{border-color:var(--line2);transform:translateY(-1px)}
+.card.sel{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.card.sel::after{content:"";position:absolute;top:7px;right:7px;width:9px;height:9px;border-radius:50%;background:var(--accent)}
+.card .dg{width:100%;height:auto;display:block;background:var(--screen);border-radius:8px 8px 0 0;border-bottom:1px solid var(--line)}
+.card .meta{padding:8px 11px 10px}
+.card .ko{font-size:13.5px;font-weight:600;display:block;line-height:1.35}
+.card .en{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--accent-dim);text-transform:uppercase;display:block;margin:2px 0 4px}
+.card.sel .en{color:var(--accent)}
+.card .d{font-size:11.5px;color:var(--mut);display:block;line-height:1.45}
+
+.monitor{position:sticky;top:16px;background:var(--panel);border:1px solid var(--line2);border-radius:12px;overflow:hidden}
+.mon-top{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--panel2)}
+.rec{width:9px;height:9px;border-radius:50%;background:#e0492e;animation:rec 1.6s ease-in-out infinite}
+@keyframes rec{50%{opacity:.25}}
+.mon-top .t{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--txt)}
+.mon-top .cnt{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--mut)}
+.mon-body{padding:14px}
+.screen{position:relative;background:var(--screen);border:1px solid var(--line2);border-radius:8px;padding:16px 14px;min-height:132px;font-family:var(--mono);font-size:12.5px;line-height:1.75;color:var(--accent);word-break:break-word}
+.screen.empty{color:var(--mut2)}
+.screen::before,.screen::after{content:"";position:absolute;width:14px;height:14px;border:1.5px solid var(--line2);pointer-events:none}
+.screen::before{top:5px;left:5px;border-right:0;border-bottom:0}
+.screen::after{bottom:5px;right:5px;border-left:0;border-top:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:11.5px;color:var(--txt);cursor:pointer}
+.chip:hover{border-color:#a0522d;border-color:var(--line2)}
+.chip .c{color:var(--mut2);font-family:var(--mono);font-size:9.5px;letter-spacing:.06em}
+.chip .x{color:var(--mut);font-size:12px}
+.mon-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.btn{font-family:var(--sans);font-size:13px;font-weight:600;border-radius:8px;padding:10px 12px;cursor:pointer;border:1px solid var(--line2);background:var(--panel2);color:var(--txt);transition:filter .15s}
+.btn:hover{filter:brightness(1.15)}
+.btn.primary{grid-column:1/-1;background:var(--accent);border-color:var(--accent);color:#181203}
+.tip{font-size:11px;color:var(--mut2);margin:12px 0 0}
+.toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%) translateY(8px);background:var(--txt);color:var(--bg);font-size:13px;font-weight:600;padding:9px 18px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:60}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.mbar{display:none;position:fixed;left:0;right:0;bottom:0;background:var(--panel);border-top:1px solid var(--line2);padding:10px 16px;z-index:50;align-items:center;gap:12px}
+.mbar .cnt{font-family:var(--mono);font-size:12px;color:var(--mut)}
+.mbar .btn{flex:1}
+footer{margin-top:30px;border-top:1px solid var(--line);padding-top:18px;font-size:12px;color:var(--mut2)}
+
+.dg .fr{fill:none;stroke:var(--line2);stroke-width:1.5}
+.dg .ln{stroke:var(--mut2);stroke-width:1.2;fill:none}
+.dg .fg{fill:#77808f}
+.dg .fgd{fill:#39404c}
+.dg .sil{fill:#0b0e12}
+.dg .hl{fill:var(--accent)}
+.dg .hls{stroke:var(--accent);stroke-width:1.5;fill:none}
+.dg .cools{stroke:var(--cool);fill:none}
+.dg .cm rect,.dg .cm path{fill:var(--accent)}
+.dg .sight{stroke:var(--accent);stroke-width:1;stroke-dasharray:3 2.5;fill:none}
+.dg .wedge{fill:var(--accent);opacity:.16;stroke:var(--accent);stroke-width:1}
+.dg .shade{fill:#2a313c}
+.dg .lit{fill:var(--accent)}
+.dg .tx{font-family:var(--mono);font-size:7.5px;letter-spacing:.06em;fill:var(--mut)}
+.dg .blur1{filter:blur(1.1px)}
+.dg .blur2{filter:blur(2.2px)}
+
+.mv-pan{animation:kf-pan 1.8s linear infinite}
+@keyframes kf-pan{to{transform:translateX(-20px)}}
+.mv-tilt{animation:kf-tilt 1.8s linear infinite}
+@keyframes kf-tilt{to{transform:translateY(-16px)}}
+.mv-din{animation:kf-din 2.4s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+@keyframes kf-din{from{transform:scale(1)}to{transform:scale(1.4)}}
+.mv-dout{animation:kf-din 2.4s ease-in-out infinite alternate-reverse;transform-box:fill-box;transform-origin:center}
+.mv-track{animation:kf-track 2.6s ease-in-out infinite alternate}
+@keyframes kf-track{from{transform:translateX(0)}to{transform:translateX(34px)}}
+.mv-crane{animation:kf-crane 2.6s ease-in-out infinite alternate}
+@keyframes kf-crane{from{transform:translateY(0)}to{transform:translateY(-24px)}}
+.mv-shake{animation:kf-shake .5s linear infinite}
+@keyframes kf-shake{0%,100%{transform:translate(0,0)}25%{transform:translate(1.5px,-1px)}50%{transform:translate(-1.1px,.9px)}75%{transform:translate(.9px,1.3px)}}
+.mv-float{animation:kf-float 3s ease-in-out infinite alternate}
+@keyframes kf-float{from{transform:translate(-6px,1.5px)}to{transform:translate(6px,-1.5px)}}
+.mv-zoom{animation:kf-zoom 1.7s ease-in infinite;transform-box:fill-box;transform-origin:center}
+@keyframes kf-zoom{0%,58%{transform:scale(1)}72%,88%{transform:scale(1.55)}100%{transform:scale(1)}}
+.mv-arc{animation:kf-arc 5s linear infinite;transform-box:view-box;transform-origin:50% 53.3%}
+@keyframes kf-arc{to{transform:rotate(360deg)}}
+.mv-vbg{animation:kf-vbg 2.4s ease-in-out infinite alternate;transform-box:view-box;transform-origin:50% 50%}
+@keyframes kf-vbg{from{transform:scale(1)}to{transform:scale(1.5)}}
+.rk-a{animation:kf-rka 2.6s ease-in-out infinite alternate}
+.rk-b{animation:kf-rka 2.6s ease-in-out infinite alternate-reverse}
+@keyframes kf-rka{from{filter:blur(0)}to{filter:blur(2px)}}
+
+@media (prefers-reduced-motion:reduce){.dg *,.rec{animation:none!important}}
+@media (max-width:1020px){
+  .layout{grid-template-columns:1fr}
+  .monitor{position:static}
+  .mbar{display:flex}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(136px,1fr))}
+}
+</style>
+</head>
+<body>
+
+<div class="slate" aria-hidden="true"></div>
+<div class="wrap">
+<header class="hero">
+  <p class="eyebrow">Cinematography reference &amp; prompt builder</p>
+  <h1>AIC DIRECTOR&#39;S CHAIR</h1>
+  <p class="lede">영화·광고 현장에서 쓰이는 <b>카메라, 샷 사이즈, 앵글, 렌즈, 무브먼트, 피사계 심도, 조명</b>을 다이어그램으로 살펴보고, 카드를 눌러 원하는 연출을 조합하면 AI 이미지·영상 생성용 <b>영문 프롬프트</b>가 자동으로 완성됩니다.</p>
+</header>
+
+<div class="presets" id="presets">
+  <span class="lb">MOOD PRESET</span>
+</div>
+
+<div class="layout">
+  <main id="cats"></main>
+
+  <aside class="monitor" id="monitor" aria-label="프롬프트 모니터">
+    <div class="mon-top"><span class="rec" aria-hidden="true"></span><span class="t">PROMPT&nbsp;MONITOR</span><span class="cnt" id="cnt">0/9</span></div>
+    <div class="mon-body">
+      <div class="screen empty" id="screen" aria-live="polite">왼쪽에서 연출 카드를 선택하면 프롬프트가 여기에 조립됩니다.</div>
+      <div class="chips" id="chips"></div>
+      <div class="mon-btns">
+        <button class="btn primary" id="copyBtn">프롬프트 복사</button>
+        <button class="btn" id="randBtn">랜덤 조합</button>
+        <button class="btn" id="resetBtn">초기화</button>
+      </div>
+      <p class="tip">카드를 다시 누르면 선택이 해제됩니다. 카테고리는 비워 두어도 됩니다.</p>
+    </div>
+  </aside>
+</div>
+
+<footer>완성된 프롬프트는 Midjourney · Veo · Kling · Runway · Seedance 등 이미지/영상 생성 도구에 그대로 붙여 넣어 사용할 수 있습니다. 다이어그램은 개념 이해를 돕기 위한 도식입니다.</footer>
+</div>
+
+<div class="mbar" id="mbar">
+  <span class="cnt" id="mcnt">0/9 선택</span>
+  <button class="btn primary" id="mcopyBtn">프롬프트 복사</button>
+</div>
+<div class="toast" id="toast">클립보드에 복사했습니다</div>
+
+<script>
+const S=(inner,cls='')=>`<svg viewBox="0 0 96 60" class="dg ${cls}" aria-hidden="true">${inner}</svg>`;
+const FR='<rect x="2" y="2" width="92" height="56" rx="3" class="fr"/>';
+const GL='<line x1="4" y1="52" x2="92" y2="52" class="ln"/>';
+const P=(cx,by,h,cls='fg')=>{const r=h*.15,w=h*.36,sy=by-h+2.1*r;
+  return `<g class="${cls}"><circle cx="${cx}" cy="${(by-h+r).toFixed(1)}" r="${r.toFixed(1)}"/><rect x="${(cx-w/2).toFixed(1)}" y="${sy.toFixed(1)}" width="${w.toFixed(1)}" height="${(by-sy).toFixed(1)}" rx="${(w/2).toFixed(1)}"/></g>`};
+const CAM=(x,y,rot=0)=>`<g class="cm" transform="translate(${x} ${y}) rotate(${rot})"><rect x="-8" y="-4.5" width="11" height="9" rx="1.5"/><path d="M3.5 -2.8 L9.5 -5.5 L9.5 5.5 L3.5 2.8 Z"/></g>`;
+const TX=(x,y,t,a='end')=>`<text x="${x}" y="${y}" class="tx" text-anchor="${a}">${t}</text>`;
+const wedge=(y1,y2)=>`<polygon points="22,30 90,${y1} 90,${y2}" class="wedge"/>`;
+const holes=(y)=>{let s='';for(let x=11;x<86;x+=8)s+=`<rect x="${x}" y="${y}" width="3.5" height="3" rx="1" class="fg"/>`;return s};
+const AR=(w,h,label)=>{const x=(48-w/2).toFixed(1),y=(26-h/2).toFixed(1);
+  return S(`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="2" class="hls"/>`+TX(48,55,label,'middle'))};
+
+const CATS=[
+{id:'camera',no:'01',ko:'카메라 & 포맷',en:'Camera / Format',desc:'무엇으로 찍는지가 화면의 질감을 결정합니다. 필름 그레인부터 8K 디지털까지.',opts:[
+ {id:'alexa',ko:'ARRI 알렉사 65',en:'ARRI Alexa 65',d:'대작 영화의 표준. 부드러운 하이라이트와 자연스러운 색.',p:'shot on ARRI Alexa 65, cinematic large-format look',
+  svg:S(`<g class="fg"><rect x="22" y="21" width="30" height="20" rx="2"/><rect x="28" y="14" width="12" height="7" rx="2"/><rect x="52" y="25" width="12" height="12"/></g><path d="M64 22 L80 16 L80 46 L64 40 Z" class="fgd"/>`+TX(48,55,'ALEXA 65','middle'))},
+ {id:'red',ko:'RED 8K 디지털',en:'RED V-Raptor 8K',d:'초고해상도 디지털. 쨍하고 선명한 광고 룩.',p:'shot on RED V-Raptor 8K, ultra-sharp commercial look',
+  svg:S(`<rect x="32" y="18" width="22" height="22" rx="3" class="fg"/><rect x="36" y="12" width="10" height="6" rx="2" class="fgd"/><circle cx="63" cy="29" r="8" class="fgd"/><circle cx="63" cy="29" r="4" class="hl"/>`+TX(48,55,'RED 8K','middle'))},
+ {id:'film35',ko:'35mm 필름',en:'35mm Film',d:'따뜻한 그레인과 할레이션. 클래식 시네마 질감.',p:'shot on 35mm Kodak film, organic grain and halation',
+  svg:S(`<rect x="8" y="15" width="80" height="30" rx="2" class="fgd"/>`+holes(17.5)+holes(39.5)+`<rect x="14" y="24" width="30" height="12" class="fg"/><rect x="50" y="24" width="30" height="12" class="fg"/>`+TX(48,55,'35MM','middle'))},
+ {id:'film16',ko:'16mm 필름',en:'16mm Film',d:'거칠고 날것의 질감. 다큐·인디·빈티지 무드.',p:'shot on grainy 16mm film, raw vintage texture',
+  svg:S(`<rect x="12" y="19" width="72" height="22" rx="2" class="fgd"/>`+holes(21)+`<rect x="18" y="27" width="20" height="11" class="fg"/><rect x="44" y="27" width="20" height="11" class="fg"/>`+TX(48,55,'16MM','middle'))},
+ {id:'imax',ko:'IMAX 65mm',en:'IMAX 65mm',d:'압도적 스케일과 디테일. 초대형 포맷.',p:'shot on IMAX 65mm film, monumental large-format detail',
+  svg:S(`<rect x="14" y="6" width="68" height="42" rx="2" class="hls"/><rect x="58" y="32" width="22" height="14" rx="1" class="ln"/>`+TX(20,15,'IMAX','start')+TX(76,42,'35mm','end'))},
+ {id:'vhs',ko:'빈티지 캠코더',en:'VHS Camcorder',d:'노이즈와 색번짐. 레트로 홈비디오 감성.',p:'vintage VHS camcorder footage, analog noise and chromatic bleed',
+  svg:S(`<rect x="18" y="14" width="60" height="30" rx="3" class="fgd"/><circle cx="34" cy="29" r="6.5" class="fg"/><circle cx="62" cy="29" r="6.5" class="fg"/><rect x="41" y="26" width="14" height="6" class="fg"/>`+TX(48,55,'VHS·REC','middle'))},
+ {id:'drone',ko:'드론 항공 촬영',en:'Aerial Drone',d:'공중 부감 스케일. 지형과 도시를 한눈에.',p:'cinematic aerial drone footage',
+  svg:S(`<line x1="36" y1="24" x2="26" y2="16" class="ln"/><line x1="60" y1="24" x2="70" y2="16" class="ln"/><line x1="36" y1="36" x2="26" y2="44" class="ln"/><line x1="60" y1="36" x2="70" y2="44" class="ln"/><circle cx="26" cy="16" r="5.5" class="hls"/><circle cx="70" cy="16" r="5.5" class="hls"/><circle cx="26" cy="44" r="5.5" class="hls"/><circle cx="70" cy="44" r="5.5" class="hls"/><rect x="40" y="23" width="16" height="14" rx="4" class="fg"/><circle cx="48" cy="40" r="2.5" class="hl"/>`)},
+ {id:'gopro',ko:'액션캠',en:'GoPro Action Cam',d:'초광각 몰입 액션. 스포츠·1인칭 체험샷.',p:'GoPro action camera footage, ultra-wide immersive energy',
+  svg:S(`<rect x="30" y="16" width="36" height="28" rx="5" class="fg"/><circle cx="42" cy="26" r="7" class="fgd"/><circle cx="42" cy="26" r="3.5" class="hl"/><rect x="52" y="22" width="10" height="8" rx="1" class="fgd"/>`+TX(48,55,'ACTION','middle'))},
+]},
+{id:'size',no:'02',ko:'샷 사이즈',en:'Shot Size',desc:'피사체를 얼마나 크게 담을지. 샷 사이즈가 정보량과 감정의 거리를 정합니다.',opts:[
+ {id:'ews',ko:'익스트림 와이드',en:'Extreme Wide',d:'인물이 점처럼. 공간·스케일·고립감 강조.',p:'extreme wide shot, vast environment dwarfing the subject',
+  svg:S(FR+`<path d="M2 46 L24 22 L40 44 M32 44 L56 14 L84 46" class="ln"/>`+GL+P(72,51,8))},
+ {id:'ws',ko:'와이드 샷',en:'Wide Shot',d:'전신과 주변 공간을 함께. 상황 설명의 기본.',p:'wide shot, full body with surrounding environment',
+  svg:S(FR+GL+P(48,52,32))},
+ {id:'fs',ko:'풀 샷',en:'Full Shot',d:'머리부터 발끝까지 프레임에 꽉 차게.',p:'full shot, entire body filling the frame',
+  svg:S(FR+P(48,57,50))},
+ {id:'ms',ko:'미디엄 샷',en:'Medium Shot',d:'허리 위. 대화 장면의 표준 샷.',p:'medium shot, waist-up framing',
+  svg:S(FR+`<circle cx="48" cy="19" r="8.5" class="fg"/><rect x="31" y="30" width="34" height="30" rx="11" class="fg"/>`)},
+ {id:'mcu',ko:'미디엄 클로즈업',en:'Medium Close-up',d:'가슴 위. 표정과 제스처를 함께 담기.',p:'medium close-up, chest-up framing',
+  svg:S(FR+`<circle cx="48" cy="23" r="11.5" class="fg"/><rect x="26" y="38" width="44" height="22" rx="13" class="fg"/>`)},
+ {id:'cu',ko:'클로즈업',en:'Close-up',d:'얼굴이 화면 가득. 감정이 주인공일 때.',p:'close-up on the face, intimate emotional detail',
+  svg:S(FR+`<circle cx="48" cy="31" r="18" class="fg"/><circle cx="42" cy="28" r="1.8" class="fgd"/><circle cx="54" cy="28" r="1.8" class="fgd"/><rect x="18" y="52" width="60" height="8" rx="4" class="fg"/>`)},
+ {id:'ecu',ko:'익스트림 클로즈업',en:'Extreme Close-up',d:'눈·입술·손끝 초근접. 긴장과 디테일.',p:'extreme close-up, macro detail of the eyes',
+  svg:S(FR+`<ellipse cx="48" cy="30" rx="27" ry="13" class="fg"/><circle cx="48" cy="30" r="9" class="fgd"/><circle cx="48" cy="30" r="4" class="hl"/>`)},
+]},
+{id:'angle',no:'03',ko:'카메라 앵글',en:'Camera Angle',desc:'카메라의 높이와 기울기. 앵글은 피사체를 바라보는 ‘태도’입니다.',opts:[
+ {id:'eye',ko:'아이 레벨',en:'Eye Level',d:'눈높이 수평. 중립적이고 자연스러운 시선.',p:'eye-level angle',
+  svg:S(GL+P(72,52,30)+CAM(20,28)+'<line x1="30" y1="28" x2="60" y2="27" class="sight"/>')},
+ {id:'low',ko:'로우 앵글',en:'Low Angle',d:'아래서 위로. 위압감·영웅적 존재감.',p:'low angle looking up, imposing heroic presence',
+  svg:S(GL+P(72,52,36)+CAM(22,46,-24)+'<line x1="31" y1="42" x2="62" y2="22" class="sight"/>')},
+ {id:'high',ko:'하이 앵글',en:'High Angle',d:'위에서 아래로. 작고 연약해 보이는 효과.',p:'high angle looking down on the subject',
+  svg:S(GL+P(72,52,26)+CAM(20,12,22)+'<line x1="30" y1="16" x2="62" y2="32" class="sight"/>')},
+ {id:'bird',ko:'버드아이 뷰',en:"Bird's-eye View",d:'수직 부감. 패턴·동선·전체 판세를 한눈에.',p:"top-down bird's-eye view, directly overhead",
+  svg:S(GL+P(48,52,14)+CAM(48,10,90)+'<line x1="48" y1="18" x2="48" y2="34" class="sight"/>')},
+ {id:'worm',ko:'웜즈아이 뷰',en:"Worm's-eye View",d:'바닥에서 수직 앙각. 극단적 왜곡과 압도.',p:"worm's-eye view from ground level, extreme upward perspective",
+  svg:S(`<polygon points="8,52 26,52 34,4 22,4" class="fgd"/><polygon points="88,52 70,52 62,4 74,4" class="fgd"/>`+GL+CAM(48,46,-90)+'<line x1="48" y1="38" x2="48" y2="14" class="sight"/>')},
+ {id:'dutch',ko:'더치 앵글',en:'Dutch Angle',d:'기울어진 수평선. 불안·긴장·광기.',p:'dutch angle, tilted off-kilter horizon',
+  svg:S(`<g transform="rotate(-12 48 30)">`+FR+`<line x1="6" y1="40" x2="90" y2="40" class="ln"/>`+P(60,40,20)+`</g>`)},
+ {id:'ots',ko:'오버 더 숄더',en:'Over-the-shoulder',d:'어깨 너머 시점. 대화·대치의 관계 샷.',p:'over-the-shoulder shot',
+  svg:S(FR+P(60,52,28)+`<circle cx="22" cy="46" r="13" class="fgd"/><rect x="2" y="52" width="42" height="8" class="fgd"/>`)},
+ {id:'pov',ko:'1인칭 시점',en:'POV',d:'인물의 눈으로 보는 1인칭 몰입 시점.',p:'first-person POV shot',
+  svg:S(FR+`<path d="M48 24 V36 M42 30 H54" class="hls"/><rect x="8" y="46" width="15" height="20" rx="7" transform="rotate(16 15 56)" class="fg"/><rect x="73" y="46" width="15" height="20" rx="7" transform="rotate(-16 81 56)" class="fg"/><circle cx="11" cy="11" r="2.2" class="hl"/>`+TX(17,14,'POV','start'))},
+]},
+{id:'lens',no:'04',ko:'렌즈 & 화각',en:'Lens / Focal Length',desc:'화각이 원근감을 결정합니다. 넓히면 공간이 왜곡되고, 당기면 압축됩니다.',opts:[
+ {id:'fish',ko:'어안 렌즈',en:'Fisheye 8mm',d:'180°에 육박하는 왜곡. 초현실·익스트림.',p:'fisheye lens, extreme barrel distortion',
+  svg:S(FR+`<path d="M6 17 Q48 5 90 17 M6 30 H90 M6 43 Q48 55 90 43 M30 5 Q22 30 30 55 M66 5 Q74 30 66 55 M48 4 V56" class="ln"/>`)},
+ {id:'uw14',ko:'초광각 14mm',en:'Ultra-wide 14mm',d:'공간을 극적으로 넓게. 웅장한 원근감.',p:'14mm ultra-wide-angle lens, expansive perspective',
+  svg:S(CAM(14,30)+wedge(3,57)+TX(88,14,'14MM'))},
+ {id:'w24',ko:'광각 24mm',en:'Wide 24mm',d:'넓은 시야와 자연스러움. 풍경·공간 소개.',p:'24mm wide-angle lens',
+  svg:S(CAM(14,30)+wedge(12,48)+TX(88,14,'24MM'))},
+ {id:'n50',ko:'표준 50mm',en:'Standard 50mm',d:'사람 눈과 비슷한 원근. 담백하고 사실적.',p:'50mm standard lens, natural human-eye perspective',
+  svg:S(CAM(14,30)+wedge(20.5,39.5)+TX(88,14,'50MM'))},
+ {id:'p85',ko:'인물 망원 85mm',en:'Portrait 85mm',d:'인물 전용 화각. 배경 압축, 얼굴 왜곡 없음.',p:'85mm portrait lens, flattering compression',
+  svg:S(CAM(14,30)+wedge(25,35)+TX(88,14,'85MM'))},
+ {id:'t200',ko:'초망원 200mm',en:'Telephoto 200mm',d:'멀리서 당겨 찍기. 공간이 납작하게 압축.',p:'200mm telephoto lens, compressed layers of depth',
+  svg:S(CAM(14,30)+wedge(27.8,32.2)+TX(88,14,'200MM'))},
+ {id:'macro',ko:'마크로 렌즈',en:'Macro',d:'아주 작은 피사체를 화면 가득. 질감 극대화.',p:'macro lens, extreme magnification of tiny details',
+  svg:S(CAM(18,30)+`<line x1="28" y1="30" x2="42" y2="30" class="sight"/><circle cx="62" cy="30" r="17" class="fg"/><circle cx="62" cy="30" r="7.5" class="hl"/>`+TX(88,14,'MACRO'))},
+ {id:'ana',ko:'아나모픽',en:'Anamorphic',d:'타원 보케와 수평 플레어. 시네마스코프 룩.',p:'anamorphic lens, oval bokeh and horizontal lens flares',
+  svg:S(FR+`<rect x="3" y="3" width="90" height="8" class="fgd"/><rect x="3" y="49" width="90" height="8" class="fgd"/><line x1="6" y1="30" x2="90" y2="30" class="cools" stroke-width="1.6"/><ellipse cx="68" cy="22" rx="4.5" ry="7.5" class="cools"/><ellipse cx="79" cy="26" rx="3" ry="5.5" class="cools"/>`)},
+]},
+{id:'move',no:'05',ko:'카메라 무브먼트',en:'Camera Movement',desc:'카메라가 움직이는 방식이 리듬을 만듭니다. 카드 위 애니메이션으로 움직임을 확인하세요.',opts:[
+ {id:'lock',ko:'고정 (락 오프)',en:'Static / Locked-off',d:'삼각대 고정. 안정·관조·정제된 구도.',p:'static locked-off shot on a tripod',
+  svg:S(FR+CAM(48,22)+`<path d="M44 28 L36 46 M52 28 L60 46 M48 28 V46" class="ln"/>`+TX(48,54,'STATIC','middle'))},
+ {id:'pan',ko:'팬',en:'Pan',d:'제자리에서 좌우 회전. 공간 훑기·시선 이동.',p:'slow panning shot across the scene',
+  svg:S(`<g class="mv-pan"><path d="M-10 6 V54 M10 6 V54 M30 6 V54 M50 6 V54 M70 6 V54 M90 6 V54 M110 6 V54 M130 6 V54" class="ln"/></g><path d="M22 30 H74 M26 26 L20 30 L26 34 M70 26 L76 30 L70 34" class="hls"/>`+FR)},
+ {id:'tilt',ko:'틸트',en:'Tilt',d:'제자리에서 상하 회전. 높이를 드러내는 리빌.',p:'tilt-up reveal shot',
+  svg:S(`<g class="mv-tilt"><path d="M6 0 H90 M6 16 H90 M6 32 H90 M6 48 H90 M6 64 H90 M6 80 H90" class="ln"/></g><path d="M48 14 V46 M44 18 L48 12 L52 18 M44 42 L48 48 L52 42" class="hls"/>`+FR)},
+ {id:'dollyin',ko:'달리 인',en:'Dolly In',d:'카메라가 피사체로 전진. 몰입과 긴장 고조.',p:'slow dolly-in pushing toward the subject',
+  svg:S(FR+`<g class="mv-din">`+P(48,50,28)+`</g><path d="M10 10 L20 17 M86 10 L76 17 M10 50 L20 43 M86 50 L76 43" class="hls"/>`)},
+ {id:'dollyout',ko:'달리 아웃',en:'Dolly Out',d:'피사체에서 후퇴. 고립되거나 상황이 드러남.',p:'dolly-out pulling away, revealing the scene',
+  svg:S(FR+`<g class="mv-dout">`+P(48,50,28)+`</g><path d="M20 17 L10 10 M76 17 L86 10 M20 43 L10 50 M76 43 L86 50" class="hls"/>`)},
+ {id:'track',ko:'트래킹 샷',en:'Tracking',d:'레일 따라 수평 이동. 인물과 나란히 걷기.',p:'lateral tracking shot moving alongside the subject',
+  svg:S(`<line x1="6" y1="50" x2="90" y2="50" class="ln"/><line x1="6" y1="54" x2="90" y2="54" class="ln"/>`+P(74,44,22)+`<g class="mv-track">${CAM(22,40)}<circle cx="16" cy="48" r="2.6" class="fg"/><circle cx="27" cy="48" r="2.6" class="fg"/></g>`)},
+ {id:'crane',ko:'크레인 / 지미집',en:'Crane / Jib',d:'수직으로 상승·하강. 스케일이 열리는 엔딩샷.',p:'crane shot rising upward over the scene',
+  svg:S(GL+`<line x1="14" y1="8" x2="14" y2="52" class="ln"/>`+P(74,52,20)+`<g class="mv-crane"><line x1="14" y1="46" x2="42" y2="40" class="ln"/>${CAM(48,40)}</g>`)},
+ {id:'hand',ko:'핸드헬드',en:'Handheld',d:'어깨 위 카메라. 거칠고 긴박한 현장감.',p:'handheld camera, raw kinetic energy',
+  svg:S(`<g class="mv-shake"><line x1="-6" y1="40" x2="102" y2="40" class="ln"/>`+P(48,52,26)+`</g>`+FR)},
+ {id:'steadi',ko:'스테디캠',en:'Steadicam',d:'떠가듯 부드러운 팔로우. 유려한 동선 추적.',p:'smooth steadicam follow shot gliding with the subject',
+  svg:S(`<path d="M8 46 Q28 38 48 44 T90 38" class="sight"/><g class="mv-float">`+P(58,48,26)+`</g>`+FR)},
+ {id:'zoom',ko:'크래시 줌',en:'Crash Zoom',d:'급격한 줌 인. 충격·코믹·강조의 순간.',p:'sudden crash zoom punch-in',
+  svg:S(FR+`<g class="mv-zoom">`+P(48,50,24)+`</g><path d="M10 10 L26 20 M86 10 L70 20 M10 50 L26 40 M86 50 L70 40" class="hls"/>`)},
+ {id:'arc',ko:'아크 (궤도)',en:'Arc / Orbit',d:'피사체를 중심으로 회전. 입체감·주인공 각인.',p:'orbiting arc shot circling around the subject',
+  svg:S(`<circle cx="48" cy="32" r="19" class="sight"/><circle cx="48" cy="32" r="5" class="fg"/><g class="mv-arc">${CAM(48,13,90)}</g>`)},
+ {id:'vertigo',ko:'돌리 줌 (버티고)',en:'Dolly Zoom',d:'달리+줌을 반대로. 배경만 일그러지는 현기증.',p:'dolly zoom vertigo effect, background warping around a fixed subject',
+  svg:S(`<g class="mv-vbg"><path d="M2 2 L38 22 M94 2 L58 22 M2 58 L38 38 M94 58 L58 38 M2 30 H28 M94 30 H68" class="ln"/></g>`+P(48,44,20)+FR)},
+]},
+{id:'dof',no:'06',ko:'피사계 심도 & 포커스',en:'Depth of Field',desc:'어디까지 선명하게 보여줄 것인가. 초점은 관객의 시선을 조종하는 도구입니다.',opts:[
+ {id:'shallow',ko:'얕은 심도 (보케)',en:'Shallow DOF',d:'주인공만 선명, 배경은 크림처럼. 인물샷 기본.',p:'shallow depth of field, creamy bokeh background',
+  svg:S(FR+`<circle cx="74" cy="22" r="6.5" class="fg blur2"/><circle cx="20" cy="42" r="12" class="fg blur2"/><circle cx="48" cy="31" r="9" class="hl"/><path d="M34 19 h-4 v4 M62 19 h4 v4 M34 43 h-4 v-4 M62 43 h4 v-4" class="hls"/>`)},
+ {id:'deep',ko:'깊은 심도 (팬포커스)',en:'Deep Focus',d:'앞뒤 전부 선명. 화면 속 모든 층이 연기함.',p:'deep focus, everything sharp from foreground to horizon',
+  svg:S(FR+`<line x1="6" y1="44" x2="90" y2="18" class="ln"/><circle cx="74" cy="22" r="6.5" class="fg"/><circle cx="48" cy="31" r="9" class="hl"/><circle cx="20" cy="42" r="12" class="fg"/>`)},
+ {id:'rack',ko:'랙 포커스',en:'Rack Focus',d:'초점을 A에서 B로 옮겨 시선을 강제 이동.',p:'rack focus shifting between foreground and background subjects',
+  svg:S(FR+`<g class="rk-a">`+P(30,54,32)+`</g><g class="rk-b">`+P(68,46,22)+`</g>`)},
+ {id:'soft',ko:'소프트 포커스',en:'Soft / Dreamy',d:'전체가 살짝 뽀얗게. 회상·꿈·로맨스.',p:'soft dreamy focus with gentle bloom',
+  svg:S(FR+`<circle cx="48" cy="28" r="20" class="hl" opacity="0.13"/><g class="blur1">`+P(48,50,30)+`</g>`)},
+ {id:'tiltshift',ko:'틸트 시프트',en:'Tilt-shift',d:'실제 도시가 미니어처 장난감처럼 보이는 효과.',p:'tilt-shift miniature effect',
+  svg:S(FR+`<g class="blur1"><path d="M6 12 H90 M6 18 H90" class="ln"/></g><rect x="20" y="26" width="12" height="10" class="hl"/><rect x="38" y="24" width="10" height="12" class="fg"/><rect x="54" y="27" width="14" height="9" class="fg"/><g class="blur1"><path d="M6 44 H90 M6 50 H90" class="ln"/></g>`)},
+]},
+{id:'light',no:'07',ko:'조명 스타일',en:'Lighting Style',desc:'빛과 그림자의 배치. 같은 얼굴도 조명에 따라 전혀 다른 인물이 됩니다.',opts:[
+ {id:'rembrandt',ko:'렘브란트 조명',en:'Rembrandt',d:'뺨에 빛의 삼각형. 클래식한 입체 인물광.',p:'Rembrandt lighting, triangle of light on the cheek',
+  svg:S(`<circle cx="12" cy="11" r="3" class="hl"/><line x1="17" y1="14" x2="28" y2="20" class="sight"/><circle cx="44" cy="32" r="15" class="shade"/><path d="M44 17 A15 15 0 0 0 44 47 Z" class="lit"/><path d="M48 27 l7.5 2.5 -6 6.5 z" class="lit"/>`)},
+ {id:'split',ko:'스플릿 조명',en:'Split',d:'얼굴 절반은 빛, 절반은 어둠. 이중성·갈등.',p:'split lighting, half the face in shadow',
+  svg:S(`<circle cx="10" cy="30" r="3" class="hl"/><circle cx="44" cy="32" r="15" class="shade"/><path d="M44 17 A15 15 0 0 0 44 47 Z" class="lit"/>`)},
+ {id:'rim',ko:'림 라이트',en:'Rim Light',d:'뒤에서 윤곽선만 빛나게. 드라마틱한 경계선.',p:"rim lighting outlining the subject's silhouette",
+  svg:S(`<circle cx="84" cy="30" r="3.5" class="hl"/><circle cx="44" cy="32" r="15" class="shade"/><path d="M49 18 A15 15 0 0 1 49 46" class="hls" stroke-width="2.6"/>`)},
+ {id:'silh',ko:'실루엣',en:'Silhouette',d:'역광 속 검은 형체. 미스터리·상징적 엔딩.',p:'backlit silhouette against a bright background',
+  svg:S(`<rect x="2" y="2" width="92" height="56" rx="3" class="lit" opacity="0.22"/><circle cx="48" cy="22" r="13" class="hl" opacity="0.55"/>`+P(48,58,36,'sil'))},
+ {id:'highkey',ko:'하이 키',en:'High Key',d:'밝고 그림자 최소. 화사한 뷰티·코미디 톤.',p:'high-key lighting, bright and nearly shadowless',
+  svg:S(`<rect x="2" y="2" width="92" height="56" rx="3" class="lit" opacity="0.12"/><circle cx="44" cy="32" r="15" class="lit" opacity="0.85"/><path d="M52 22 A15 15 0 0 1 52 42" class="shade" opacity="0.5"/>`)},
+ {id:'lowkey',ko:'로우 키',en:'Low Key',d:'어둠이 지배, 빛은 조금만. 누아르·서스펜스.',p:'low-key lighting, deep shadows and pools of darkness',
+  svg:S(`<circle cx="44" cy="32" r="15" class="shade"/><ellipse cx="51" cy="24" rx="4" ry="8" class="lit" transform="rotate(38 51 24)"/>`)},
+ {id:'softl',ko:'소프트 라이트',en:'Soft Diffused',d:'디퓨전을 통과한 빛. 피부를 곱게 감싸는 광.',p:'soft diffused lighting gently wrapping the subject',
+  svg:S(`<rect x="6" y="13" width="10" height="34" rx="2" class="lit" opacity="0.5"/><circle cx="48" cy="32" r="15" class="lit" opacity="0.8"/><path d="M48 17 A15 15 0 0 1 48 47 Z" class="shade blur1" opacity="0.65"/>`)},
+ {id:'hardl',ko:'하드 라이트',en:'Hard Light',d:'직사광의 쨍한 경계. 정오 야외·패션·강렬함.',p:'hard direct light with crisp sharp-edged shadows',
+  svg:S(`<circle cx="12" cy="9" r="2.6" class="hl"/><line x1="17" y1="12" x2="30" y2="19" class="sight"/><circle cx="44" cy="30" r="14" class="shade"/><path d="M44 16 A14 14 0 0 0 44 44 Z" class="lit"/><ellipse cx="62" cy="50" rx="16" ry="3.5" class="shade"/>`)},
+]},
+{id:'src',no:'08',ko:'광원 & 시간대',en:'Light Source / Time',desc:'광원의 색온도와 시간대가 장면의 ‘기분’을 정합니다.',opts:[
+ {id:'golden',ko:'골든 아워',en:'Golden Hour',d:'해 지기 직전 황금빛. 긴 그림자와 따뜻한 톤.',p:'golden hour sunlight, long warm shadows',
+  svg:S(`<rect x="2" y="2" width="92" height="42" rx="3" fill="#a4642f"/><circle cx="70" cy="42" r="7.5" fill="#f5c56a"/><rect x="2" y="44" width="92" height="14" fill="#241a10"/>`+P(30,52,15,'sil')+`<polygon points="25,52 4,55 35,55" fill="#160f08"/>`)},
+ {id:'bluehour',ko:'블루 아워',en:'Blue Hour',d:'해 진 직후의 푸른 어스름. 차분·서정적.',p:'blue hour twilight, cool ambient glow',
+  svg:S(`<rect x="2" y="2" width="92" height="42" rx="3" fill="#22344e"/><rect x="2" y="36" width="92" height="8" fill="#41618c"/><rect x="2" y="44" width="92" height="14" fill="#0c1119"/>`+P(48,52,15,'sil'))},
+ {id:'noon',ko:'정오 데이라이트',en:'Midday Sun',d:'머리 위 직사광. 쨍하고 그림자가 짧음.',p:'harsh midday sunlight, short crisp shadows',
+  svg:S(`<rect x="2" y="2" width="92" height="42" rx="3" fill="#6fa5ce"/><circle cx="48" cy="12" r="7" fill="#f7e9a8"/><rect x="2" y="44" width="92" height="14" fill="#3d3526"/>`+P(48,52,15,'sil')+`<ellipse cx="48" cy="53" rx="7" ry="2" fill="#221d13"/>`)},
+ {id:'overcast',ko:'흐린 날',en:'Overcast',d:'구름이 거대한 디퓨저. 그림자 없는 균일광.',p:'overcast diffused daylight, soft even light',
+  svg:S(`<rect x="2" y="2" width="92" height="42" rx="3" fill="#55606e"/><ellipse cx="30" cy="14" rx="16" ry="6" fill="#6e7987"/><ellipse cx="62" cy="20" rx="20" ry="7" fill="#78828f"/><rect x="2" y="44" width="92" height="14" fill="#20242b"/>`+P(48,52,15,'sil'))},
+ {id:'neon',ko:'네온사인 야경',en:'Neon Night',d:'밤거리 네온 반사광. 사이버·시티팝 무드.',p:'neon signs glowing at night, colorful reflections on wet streets',
+  svg:S(`<rect x="2" y="2" width="92" height="56" rx="3" fill="#0a0d15"/><rect x="16" y="10" width="27" height="15" rx="2" fill="none" stroke="#e85d9b" stroke-width="2"/><rect x="56" y="18" width="24" height="11" rx="2" fill="none" stroke="#4ec9e8" stroke-width="2"/><path d="M22 48 H40 M60 52 H74" stroke="#e85d9b" stroke-width="1.5" opacity="0.5"/><path d="M30 54 H48" stroke="#4ec9e8" stroke-width="1.5" opacity="0.5"/>`)},
+ {id:'fluor',ko:'형광등',en:'Fluorescent',d:'창백한 형광등. 사무실·편의점의 서늘한 현실감.',p:'cold fluorescent lighting, pale greenish cast',
+  svg:S(`<rect x="2" y="2" width="92" height="56" rx="3" fill="#161c19"/><rect x="30" y="7" width="36" height="4.5" rx="2" fill="#cfe8d8"/><polygon points="30,12 66,12 84,52 12,52" fill="#a9c9b4" opacity="0.16"/>`+P(48,52,17,'fg'))},
+ {id:'candle',ko:'촛불 / 모닥불',en:'Candlelight',d:'일렁이는 불빛. 친밀하고 은밀한 웜톤.',p:'candlelight, warm flickering intimate glow',
+  svg:S(`<rect x="2" y="2" width="92" height="56" rx="3" fill="#120c07"/><circle cx="48" cy="30" r="19" fill="#f0a63c" opacity="0.15"/><path d="M48 22 Q53.5 30 48 36 Q42.5 30 48 22" fill="#f2a93b"/><rect x="45" y="36" width="6" height="12" rx="1.5" fill="#d8cdb8"/>`)},
+ {id:'moon',ko:'달빛',en:'Moonlight',d:'은청색의 밤. 고요하고 신비로운 톤.',p:'moonlight, silver-blue nocturnal glow',
+  svg:S(`<rect x="2" y="2" width="92" height="56" rx="3" fill="#0f1626"/><circle cx="66" cy="16" r="9" fill="#d8e2ee"/><circle cx="62" cy="13" r="8" fill="#0f1626"/><circle cx="24" cy="10" r="1" fill="#8fa3c0"/><circle cx="38" cy="20" r="1" fill="#8fa3c0"/><circle cx="16" cy="26" r="1" fill="#8fa3c0"/><rect x="2" y="44" width="92" height="14" fill="#0a0e18"/>`+P(48,52,15,'sil'))},
+]},
+{id:'ar',no:'09',ko:'화면비',en:'Aspect Ratio',desc:'프레임의 비율. 어디에 상영·게시할지까지가 연출의 일부입니다.',opts:[
+ {id:'239',ko:'2.39:1 아나모픽',en:'2.39:1 Scope',d:'가장 시네마틱한 와이드. 대작 영화의 표준.',p:'2.39:1 anamorphic widescreen aspect ratio',svg:AR(84,35,'2.39:1')},
+ {id:'185',ko:'1.85:1 시네마',en:'1.85:1 Flat',d:'표준 극장 상영비. 무난한 시네마 프레임.',p:'1.85:1 theatrical aspect ratio',svg:AR(78,42,'1.85:1')},
+ {id:'169',ko:'16:9 와이드',en:'16:9',d:'TV·유튜브 표준. 범용 와이드스크린.',p:'16:9 widescreen',svg:AR(78,44,'16:9')},
+ {id:'43',ko:'4:3 아카데미',en:'4:3 Academy',d:'옛 TV·필름 비율. 레트로, 인물 집중.',p:'4:3 academy ratio, nostalgic framing',svg:AR(56,42,'4:3')},
+ {id:'916',ko:'9:16 버티컬',en:'9:16 Vertical',d:'모바일 세로 풀스크린. 릴스·쇼츠·틱톡.',p:'9:16 vertical format',svg:AR(25,44,'9:16')},
+ {id:'11',ko:'1:1 스퀘어',en:'1:1 Square',d:'정방형 프레임. 피드 친화적 중앙 구도.',p:'1:1 square format',svg:AR(44,44,'1:1')},
+]},
+];
+
+const PRESETS=[
+ {ko:'시네마틱 히어로',sel:{camera:'alexa',size:'cu',angle:'low',lens:'p85',move:'dollyin',dof:'shallow',light:'rim',src:'golden',ar:'239'}},
+ {ko:'필름 누아르',sel:{camera:'film35',size:'mcu',angle:'dutch',lens:'n50',move:'lock',dof:'deep',light:'lowkey',src:'neon',ar:'43'}},
+ {ko:'다큐 리얼',sel:{camera:'film16',size:'ms',angle:'eye',lens:'w24',move:'hand',dof:'deep',light:'softl',src:'overcast',ar:'169'}},
+ {ko:'뮤직비디오',sel:{camera:'red',size:'ws',angle:'low',lens:'uw14',move:'arc',dof:'shallow',light:'hardl',src:'neon',ar:'239'}},
+ {ko:'버티컬 SNS',sel:{camera:'red',size:'mcu',angle:'eye',lens:'n50',move:'steadi',dof:'shallow',light:'highkey',src:'noon',ar:'916'}},
+];
+
+const ORDER=['size','angle','move','lens','dof','light','src','camera','ar'];
+const sel={};
+CATS.forEach(c=>sel[c.id]=null);
+
+const catsEl=document.getElementById('cats');
+CATS.forEach(cat=>{
+  const sec=document.createElement('section');
+  sec.className='cat';
+  sec.innerHTML=`<div class="sec-head"><span class="sec-no">${cat.no}</span><h2>${cat.ko}</h2><span class="sec-en">${cat.en}</span><p class="sec-desc">${cat.desc}</p></div><div class="grid"></div>`;
+  const grid=sec.querySelector('.grid');
+  cat.opts.forEach(o=>{
+    const b=document.createElement('button');
+    b.className='card';b.type='button';
+    b.dataset.cat=cat.id;b.dataset.opt=o.id;
+    b.setAttribute('aria-pressed','false');
+    b.innerHTML=o.svg+`<span class="meta"><span class="ko">${o.ko}</span><span class="en">${o.en}</span><span class="d">${o.d}</span></span>`;
+    b.addEventListener('click',()=>{
+      sel[cat.id]=(sel[cat.id]===o.id)?null:o.id;
+      update();
+    });
+    grid.appendChild(b);
+  });
+  catsEl.appendChild(sec);
+});
+
+const presetsEl=document.getElementById('presets');
+PRESETS.forEach(p=>{
+  const b=document.createElement('button');
+  b.className='preset';b.type='button';b.textContent=p.ko;
+  b.addEventListener('click',()=>{
+    CATS.forEach(c=>sel[c.id]=p.sel[c.id]||null);
+    update();
+  });
+  presetsEl.appendChild(b);
+});
+
+const screenEl=document.getElementById('screen');
+const chipsEl=document.getElementById('chips');
+const cntEl=document.getElementById('cnt');
+const mcntEl=document.getElementById('mcnt');
+function getOpt(catId,optId){
+  const c=CATS.find(c=>c.id===catId);
+  return c?c.opts.find(o=>o.id===optId):null;
+}
+function buildPrompt(){
+  const parts=[];
+  ORDER.forEach(cid=>{
+    const o=sel[cid]?getOpt(cid,sel[cid]):null;
+    if(o)parts.push(o.p);
+  });
+  return parts.join(', ');
+}
+function update(){
+  document.querySelectorAll('.card').forEach(b=>{
+    const on=sel[b.dataset.cat]===b.dataset.opt;
+    b.classList.toggle('sel',on);
+    b.setAttribute('aria-pressed',on?'true':'false');
+  });
+  const n=Object.values(sel).filter(Boolean).length;
+  cntEl.textContent=n+'/9';
+  mcntEl.textContent=n+'/9 선택';
+  const prompt=buildPrompt();
+  const hasSel=n>0;
+  screenEl.classList.toggle('empty',!hasSel);
+  screenEl.textContent=hasSel?prompt:'왼쪽에서 연출 카드를 선택하면 프롬프트가 여기에 조립됩니다.';
+  chipsEl.innerHTML='';
+  CATS.forEach(c=>{
+    const o=sel[c.id]?getOpt(c.id,sel[c.id]):null;
+    if(!o)return;
+    const chip=document.createElement('button');
+    chip.className='chip';chip.type='button';
+    chip.innerHTML=`<span class="c">${c.ko}</span> ${o.ko} <span class="x">×</span>`;
+    chip.title='선택 해제';
+    chip.addEventListener('click',()=>{sel[c.id]=null;update();});
+    chipsEl.appendChild(chip);
+  });
+}
+
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('on');
+  clearTimeout(t._h);
+  t._h=setTimeout(()=>t.classList.remove('on'),1800);
+}
+function copyPrompt(){
+  const p=buildPrompt();
+  if(!p){toast('먼저 연출을 선택해 주세요');return;}
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(p).then(()=>toast('클립보드에 복사했습니다'),()=>fallbackCopy(p));
+  }else fallbackCopy(p);
+}
+function fallbackCopy(p){
+  const ta=document.createElement('textarea');
+  ta.value=p;document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy');toast('클립보드에 복사했습니다');}
+  catch(e){toast('복사에 실패했습니다');}
+  document.body.removeChild(ta);
+}
+document.getElementById('copyBtn').addEventListener('click',copyPrompt);
+document.getElementById('mcopyBtn').addEventListener('click',copyPrompt);
+document.getElementById('randBtn').addEventListener('click',()=>{
+  CATS.forEach(c=>{sel[c.id]=c.opts[Math.floor(Math.random()*c.opts.length)].id;});
+  update();
+});
+document.getElementById('resetBtn').addEventListener('click',()=>{
+  CATS.forEach(c=>sel[c.id]=null);
+  update();
+});
+update();
+</script>
+
+</body>
+</html>
