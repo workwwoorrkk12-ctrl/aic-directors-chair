@@ -30,7 +30,10 @@ body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);line
 .wrap{max-width:1240px;margin:0 auto;padding:0 24px 120px}
 
 .slate{height:14px;background:repeating-linear-gradient(-45deg,var(--txt) 0 14px,var(--bg) 14px 28px);opacity:.9}
-header.hero{padding:44px 0 12px;border-bottom:1px solid var(--line);margin-bottom:8px}
+header.hero{position:relative;padding:44px 0 12px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.langtog{position:absolute;top:26px;right:0;display:flex;border:1px solid var(--line2);border-radius:999px;overflow:hidden}
+.lt{font-family:var(--mono);font-size:11px;letter-spacing:.12em;padding:6px 13px;background:var(--panel);color:var(--mut);border:0;cursor:pointer;transition:background .15s,color .15s}
+.lt.on{background:var(--accent);color:#181203;font-weight:700}
 .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--accent);text-transform:uppercase;margin:0 0 14px}
 h1{font-size:clamp(28px,4vw,44px);margin:0 0 12px;letter-spacing:-.02em;line-height:1.15;text-wrap:balance}
 h1 .en{color:var(--mut2);font-weight:700}
@@ -150,9 +153,12 @@ footer{margin-top:30px;border-top:1px solid var(--line);padding-top:18px;font-si
 <div class="slate" aria-hidden="true"></div>
 <div class="wrap">
 <header class="hero">
+  <div class="langtog" role="group" aria-label="Language">
+    <button type="button" class="lt on" id="ltKo" aria-pressed="true">KO</button><button type="button" class="lt" id="ltEn" aria-pressed="false">EN</button>
+  </div>
   <p class="eyebrow">Cinematography reference &amp; prompt builder</p>
   <h1>AIC DIRECTOR&#39;S CHAIR</h1>
-  <p class="lede">영화·광고 현장에서 쓰이는 <b>카메라, 샷 사이즈, 앵글, 렌즈, 무브먼트, 피사계 심도, 조명</b>을 다이어그램으로 살펴보고, 카드를 눌러 원하는 연출을 조합하면 AI 이미지·영상 생성용 <b>영문 프롬프트</b>가 자동으로 완성됩니다.</p>
+  <p class="lede" id="lede">영화·광고 현장에서 쓰이는 <b>카메라, 샷 사이즈, 앵글, 렌즈, 무브먼트, 피사계 심도, 조명</b>을 다이어그램으로 살펴보고, 카드를 눌러 원하는 연출을 조합하면 AI 이미지·영상 생성용 <b>영문 프롬프트</b>가 자동으로 완성됩니다.</p>
 </header>
 
 <div class="presets" id="presets">
@@ -172,12 +178,12 @@ footer{margin-top:30px;border-top:1px solid var(--line);padding-top:18px;font-si
         <button class="btn" id="randBtn">랜덤 조합</button>
         <button class="btn" id="resetBtn">초기화</button>
       </div>
-      <p class="tip">카드를 다시 누르면 선택이 해제됩니다. 카테고리는 비워 두어도 됩니다.</p>
+      <p class="tip" id="tip">카드를 다시 누르면 선택이 해제됩니다. 카테고리는 비워 두어도 됩니다.</p>
     </div>
   </aside>
 </div>
 
-<footer>완성된 프롬프트는 Midjourney · Veo · Kling · Runway · Seedance 등 이미지/영상 생성 도구에 그대로 붙여 넣어 사용할 수 있습니다. 다이어그램은 개념 이해를 돕기 위한 도식입니다.</footer>
+<footer id="footer">완성된 프롬프트는 Midjourney · Veo · Kling · Runway · Seedance 등 이미지/영상 생성 도구에 그대로 붙여 넣어 사용할 수 있습니다. 다이어그램은 개념 이해를 돕기 위한 도식입니다.</footer>
 </div>
 
 <div class="mbar" id="mbar">
@@ -355,48 +361,186 @@ const CATS=[
 ];
 
 const PRESETS=[
- {ko:'시네마틱 히어로',sel:{camera:'alexa',size:'cu',angle:'low',lens:'p85',move:'dollyin',dof:'shallow',light:'rim',src:'golden',ar:'239'}},
- {ko:'필름 누아르',sel:{camera:'film35',size:'mcu',angle:'dutch',lens:'n50',move:'lock',dof:'deep',light:'lowkey',src:'neon',ar:'43'}},
- {ko:'다큐 리얼',sel:{camera:'film16',size:'ms',angle:'eye',lens:'w24',move:'hand',dof:'deep',light:'softl',src:'overcast',ar:'169'}},
- {ko:'뮤직비디오',sel:{camera:'red',size:'ws',angle:'low',lens:'uw14',move:'arc',dof:'shallow',light:'hardl',src:'neon',ar:'239'}},
- {ko:'버티컬 SNS',sel:{camera:'red',size:'mcu',angle:'eye',lens:'n50',move:'steadi',dof:'shallow',light:'highkey',src:'noon',ar:'916'}},
+ {ko:'시네마틱 히어로',en:'Cinematic Hero',sel:{camera:'alexa',size:'cu',angle:'low',lens:'p85',move:'dollyin',dof:'shallow',light:'rim',src:'golden',ar:'239'}},
+ {ko:'필름 누아르',en:'Film Noir',sel:{camera:'film35',size:'mcu',angle:'dutch',lens:'n50',move:'lock',dof:'deep',light:'lowkey',src:'neon',ar:'43'}},
+ {ko:'다큐 리얼',en:'Documentary',sel:{camera:'film16',size:'ms',angle:'eye',lens:'w24',move:'hand',dof:'deep',light:'softl',src:'overcast',ar:'169'}},
+ {ko:'뮤직비디오',en:'Music Video',sel:{camera:'red',size:'ws',angle:'low',lens:'uw14',move:'arc',dof:'shallow',light:'hardl',src:'neon',ar:'239'}},
+ {ko:'버티컬 SNS',en:'Vertical Social',sel:{camera:'red',size:'mcu',angle:'eye',lens:'n50',move:'steadi',dof:'shallow',light:'highkey',src:'noon',ar:'916'}},
 ];
+
+const I18N={
+ko:{
+ lede:'영화·광고 현장에서 쓰이는 <b>카메라, 샷 사이즈, 앵글, 렌즈, 무브먼트, 피사계 심도, 조명</b>을 다이어그램으로 살펴보고, 카드를 눌러 원하는 연출을 조합하면 AI 이미지·영상 생성용 <b>영문 프롬프트</b>가 자동으로 완성됩니다.',
+ empty:'왼쪽에서 연출 카드를 선택하면 프롬프트가 여기에 조립됩니다.',
+ copy:'프롬프트 복사',rand:'랜덤 조합',reset:'초기화',
+ tip:'카드를 다시 누르면 선택이 해제됩니다. 카테고리는 비워 두어도 됩니다.',
+ footer:'완성된 프롬프트는 Midjourney · Veo · Kling · Runway · Seedance 등 이미지/영상 생성 도구에 그대로 붙여 넣어 사용할 수 있습니다. 다이어그램은 개념 이해를 돕기 위한 도식입니다.',
+ selected:'선택',copied:'클립보드에 복사했습니다',selectFirst:'먼저 연출을 선택해 주세요',copyFail:'복사에 실패했습니다',remove:'선택 해제'
+},
+en:{
+ lede:'Browse the <b>cameras, shot sizes, angles, lenses, movements, depth of field and lighting</b> used on real film and commercial sets — then tap cards to combine them into a ready-to-use <b>prompt</b> for AI image and video generation.',
+ empty:'Select cards on the left and your prompt assembles here.',
+ copy:'Copy prompt',rand:'Randomize',reset:'Reset',
+ tip:'Tap a card again to deselect it. Categories can be left empty.',
+ footer:'Paste the finished prompt straight into Midjourney, Veo, Kling, Runway, Seedance and other generators. Diagrams are schematic, for concept clarity.',
+ selected:'selected',copied:'Copied to clipboard',selectFirst:'Select some options first',copyFail:'Copy failed',remove:'Deselect'
+}
+};
+const EN_SEC={
+camera:'What you shoot on decides the texture — from film grain to 8K digital.',
+size:'How large the subject sits in frame. Shot size sets information and emotional distance.',
+angle:"The camera's height and tilt. An angle is an attitude toward the subject.",
+lens:'Focal length decides perspective — wider distorts, longer compresses.',
+move:'How the camera moves creates rhythm. Watch the animation on each card.',
+dof:'How much stays sharp. Focus is a tool for steering the eye.',
+light:'The placement of light and shadow. The same face becomes a different person.',
+src:"The source's color temperature and time of day set the scene's mood.",
+ar:'The shape of the frame. Where it screens is part of the direction.'
+};
+const EN_DESC={
+alexa:'The blockbuster standard. Smooth highlights, natural color.',
+red:'Ultra-high-res digital. Crisp, punchy commercial look.',
+film35:'Warm grain and halation. Classic cinema texture.',
+film16:'Rough, raw texture. Documentary, indie, vintage mood.',
+imax:'Overwhelming scale and detail. The giant film format.',
+vhs:'Noise and color bleed. Retro home-video feel.',
+drone:'Aerial scale. Terrain and cities at a glance.',
+gopro:'Ultra-wide immersive action. Sports, first-person energy.',
+ews:'The figure becomes a dot. Space, scale, isolation.',
+ws:'Full body plus surroundings. The basic scene-setter.',
+fs:'Head to toe, filling the frame.',
+ms:'Waist up. The standard shot for dialogue.',
+mcu:'Chest up. Expression and gesture together.',
+cu:'The face fills the screen. When emotion is the subject.',
+ecu:'Eyes, lips, fingertips up close. Tension and detail.',
+eye:'Level with the eyes. Neutral, natural point of view.',
+low:'Looking up from below. Power and heroic presence.',
+high:'Looking down. Makes the subject small and vulnerable.',
+bird:'Straight down from above. Patterns, movement, the whole board.',
+worm:'From the ground, straight up. Extreme distortion and awe.',
+dutch:'A tilted horizon. Unease, tension, madness.',
+ots:'Across a shoulder. The relationship shot for dialogue.',
+pov:'First-person immersion through the character&#39;s eyes.',
+fish:'Near-180° barrel distortion. Surreal and extreme.',
+uw14:'Dramatically wide space. Epic sense of perspective.',
+w24:'Wide view, still natural. Landscapes and establishing.',
+n50:'Close to the human eye. Plain and truthful.',
+p85:'The portrait lens. Compressed background, no facial distortion.',
+t200:'Shot from afar. Space flattens and compresses.',
+macro:'Tiny subjects fill the screen. Texture maximized.',
+ana:'Oval bokeh and horizontal flares. The CinemaScope look.',
+lock:'Fixed on a tripod. Stability, composure, refined framing.',
+pan:'Rotating left–right in place. Scanning space, guiding the eye.',
+tilt:'Rotating up–down in place. The height-revealing move.',
+dollyin:'Pushing toward the subject. Immersion and rising tension.',
+dollyout:'Pulling away. Isolation, or the bigger picture revealed.',
+track:'Moving along rails. Walking side by side with the subject.',
+crane:'Rising and descending. The scale-opening ending shot.',
+hand:'Camera on the shoulder. Rough, urgent immediacy.',
+steadi:'Floating, silky-smooth follow. Graceful motion tracking.',
+zoom:'A sudden punch-in. Shock, comedy, emphasis.',
+arc:'Circling the subject. Dimension and star presence.',
+vertigo:'Dolly against zoom. Only the background warps.',
+shallow:'Only the hero sharp, background like cream. Portrait default.',
+deep:'Sharp front to back. Every layer of the frame performs.',
+rack:'Focus slides from A to B, steering the viewer&#39;s eye.',
+soft:'A gentle milky veil. Memory, dream, romance.',
+tiltshift:'A real city that looks like a toy miniature.',
+rembrandt:'A triangle of light on the cheek. Classic dimensional portrait.',
+split:'Half lit, half dark. Duality and conflict.',
+rim:'Only the outline glows from behind. A dramatic edge.',
+silh:'A black shape against light. Mystery, iconic endings.',
+highkey:'Bright and nearly shadowless. Beauty and comedy tones.',
+lowkey:'Darkness rules, light is scarce. Noir and suspense.',
+softl:'Light through diffusion. Skin wrapped gently.',
+hardl:'Crisp direct-light edges. Noon, fashion, intensity.',
+golden:'Gold just before sunset. Long shadows, warm tones.',
+bluehour:'Blue dusk after sundown. Calm and lyrical.',
+noon:'Sun straight overhead. Harsh light, short shadows.',
+overcast:'Clouds as a giant diffuser. Even, shadowless light.',
+neon:'Neon bouncing off night streets. Cyber, city-pop mood.',
+fluor:'Pale fluorescents. The cool realism of offices and stores.',
+candle:'Flickering flame. Intimate, secret warmth.',
+moon:'A silver-blue night. Quiet and mysterious.',
+239:'The most cinematic width. Blockbuster standard.',
+185:'Standard theatrical ratio. A safe cinema frame.',
+169:'TV and YouTube standard. Universal widescreen.',
+43:'Old TV and film ratio. Retro, portrait focus.',
+916:'Full-screen vertical. Reels, Shorts, TikTok.',
+11:'Square frame. Feed-friendly, centered composition.'
+};
+let lang='ko';
+const T=()=>I18N[lang];
 
 const ORDER=['size','angle','move','lens','dof','light','src','camera','ar'];
 const sel={};
 CATS.forEach(c=>sel[c.id]=null);
 
 const catsEl=document.getElementById('cats');
-CATS.forEach(cat=>{
-  const sec=document.createElement('section');
-  sec.className='cat';
-  sec.innerHTML=`<div class="sec-head"><span class="sec-no">${cat.no}</span><h2>${cat.ko}</h2><span class="sec-en">${cat.en}</span><p class="sec-desc">${cat.desc}</p></div><div class="grid"></div>`;
-  const grid=sec.querySelector('.grid');
-  cat.opts.forEach(o=>{
-    const b=document.createElement('button');
-    b.className='card';b.type='button';
-    b.dataset.cat=cat.id;b.dataset.opt=o.id;
-    b.setAttribute('aria-pressed','false');
-    b.innerHTML=o.svg+`<span class="meta"><span class="ko">${o.ko}</span><span class="en">${o.en}</span><span class="d">${o.d}</span></span>`;
-    b.addEventListener('click',()=>{
-      sel[cat.id]=(sel[cat.id]===o.id)?null:o.id;
-      update();
+function renderAll(){
+  catsEl.innerHTML='';
+  CATS.forEach(cat=>{
+    const sec=document.createElement('section');
+    sec.className='cat';
+    const title=lang==='ko'?cat.ko:cat.en;
+    const sub=lang==='ko'?`<span class="sec-en">${cat.en}</span>`:'';
+    const desc=lang==='ko'?cat.desc:EN_SEC[cat.id];
+    sec.innerHTML=`<div class="sec-head"><span class="sec-no">${cat.no}</span><h2>${title}</h2>${sub}<p class="sec-desc">${desc}</p></div><div class="grid"></div>`;
+    const grid=sec.querySelector('.grid');
+    cat.opts.forEach(o=>{
+      const b=document.createElement('button');
+      b.className='card';b.type='button';
+      b.dataset.cat=cat.id;b.dataset.opt=o.id;
+      b.setAttribute('aria-pressed','false');
+      const name=lang==='ko'?o.ko:o.en;
+      const sub2=lang==='ko'?`<span class="en">${o.en}</span>`:'<span class="en">&nbsp;</span>';
+      const d=lang==='ko'?o.d:EN_DESC[o.id];
+      b.innerHTML=o.svg+`<span class="meta"><span class="ko">${name}</span>${sub2}<span class="d">${d}</span></span>`;
+      b.addEventListener('click',()=>{
+        sel[cat.id]=(sel[cat.id]===o.id)?null:o.id;
+        update();
+      });
+      grid.appendChild(b);
     });
-    grid.appendChild(b);
+    catsEl.appendChild(sec);
   });
-  catsEl.appendChild(sec);
-});
+}
 
 const presetsEl=document.getElementById('presets');
-PRESETS.forEach(p=>{
-  const b=document.createElement('button');
-  b.className='preset';b.type='button';b.textContent=p.ko;
-  b.addEventListener('click',()=>{
-    CATS.forEach(c=>sel[c.id]=p.sel[c.id]||null);
-    update();
+function renderPresets(){
+  presetsEl.querySelectorAll('.preset').forEach(b=>b.remove());
+  PRESETS.forEach(p=>{
+    const b=document.createElement('button');
+    b.className='preset';b.type='button';b.textContent=lang==='ko'?p.ko:p.en;
+    b.addEventListener('click',()=>{
+      CATS.forEach(c=>sel[c.id]=p.sel[c.id]||null);
+      update();
+    });
+    presetsEl.appendChild(b);
   });
-  presetsEl.appendChild(b);
-});
+}
+
+function applyLang(){
+  document.documentElement.lang=lang;
+  document.getElementById('lede').innerHTML=T().lede;
+  document.getElementById('tip').textContent=T().tip;
+  document.getElementById('footer').textContent=T().footer;
+  document.getElementById('copyBtn').textContent=T().copy;
+  document.getElementById('mcopyBtn').textContent=T().copy;
+  document.getElementById('randBtn').textContent=T().rand;
+  document.getElementById('resetBtn').textContent=T().reset;
+  document.getElementById('ltKo').classList.toggle('on',lang==='ko');
+  document.getElementById('ltEn').classList.toggle('on',lang==='en');
+  document.getElementById('ltKo').setAttribute('aria-pressed',lang==='ko'?'true':'false');
+  document.getElementById('ltEn').setAttribute('aria-pressed',lang==='en'?'true':'false');
+}
+function setLang(l){
+  if(lang===l)return;
+  lang=l;
+  applyLang();renderAll();renderPresets();update();
+}
+document.getElementById('ltKo').addEventListener('click',()=>setLang('ko'));
+document.getElementById('ltEn').addEventListener('click',()=>setLang('en'));
 
 const screenEl=document.getElementById('screen');
 const chipsEl=document.getElementById('chips');
@@ -422,19 +566,19 @@ function update(){
   });
   const n=Object.values(sel).filter(Boolean).length;
   cntEl.textContent=n+'/9';
-  mcntEl.textContent=n+'/9 선택';
+  mcntEl.textContent=n+'/9 '+T().selected;
   const prompt=buildPrompt();
   const hasSel=n>0;
   screenEl.classList.toggle('empty',!hasSel);
-  screenEl.textContent=hasSel?prompt:'왼쪽에서 연출 카드를 선택하면 프롬프트가 여기에 조립됩니다.';
+  screenEl.textContent=hasSel?prompt:T().empty;
   chipsEl.innerHTML='';
   CATS.forEach(c=>{
     const o=sel[c.id]?getOpt(c.id,sel[c.id]):null;
     if(!o)return;
     const chip=document.createElement('button');
     chip.className='chip';chip.type='button';
-    chip.innerHTML=`<span class="c">${c.ko}</span> ${o.ko} <span class="x">×</span>`;
-    chip.title='선택 해제';
+    chip.innerHTML=`<span class="c">${lang==='ko'?c.ko:c.en}</span> ${lang==='ko'?o.ko:o.en} <span class="x">×</span>`;
+    chip.title=T().remove;
     chip.addEventListener('click',()=>{sel[c.id]=null;update();});
     chipsEl.appendChild(chip);
   });
@@ -449,16 +593,16 @@ function toast(msg){
 }
 function copyPrompt(){
   const p=buildPrompt();
-  if(!p){toast('먼저 연출을 선택해 주세요');return;}
+  if(!p){toast(T().selectFirst);return;}
   if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText(p).then(()=>toast('클립보드에 복사했습니다'),()=>fallbackCopy(p));
+    navigator.clipboard.writeText(p).then(()=>toast(T().copied),()=>fallbackCopy(p));
   }else fallbackCopy(p);
 }
 function fallbackCopy(p){
   const ta=document.createElement('textarea');
   ta.value=p;document.body.appendChild(ta);ta.select();
-  try{document.execCommand('copy');toast('클립보드에 복사했습니다');}
-  catch(e){toast('복사에 실패했습니다');}
+  try{document.execCommand('copy');toast(T().copied);}
+  catch(e){toast(T().copyFail);}
   document.body.removeChild(ta);
 }
 document.getElementById('copyBtn').addEventListener('click',copyPrompt);
@@ -471,7 +615,7 @@ document.getElementById('resetBtn').addEventListener('click',()=>{
   CATS.forEach(c=>sel[c.id]=null);
   update();
 });
-update();
+applyLang();renderAll();renderPresets();update();
 </script>
 
 </body>
