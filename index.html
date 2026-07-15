@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AIC DIRECTOR'S CHAIR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
 <script>
 if (location.hostname.indexOf('github.io') !== -1) {
   var gaS = document.createElement('script');
@@ -17,13 +20,18 @@ if (location.hostname.indexOf('github.io') !== -1) {
 }
 </script>
 <style>
+@font-face{font-family:'Samsung SS Body KR';src:url('font/SamsungSSBodyKR-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Samsung SS Body KR';src:url('font/SamsungSSBodyKR-Bold.woff2') format('woff2');font-weight:600 700;font-display:swap}
+@font-face{font-family:'Samsung SS Head KR';src:url('font/SamsungSSHeadKR-Medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Samsung SS Head KR';src:url('font/SamsungSSHeadKR-Bold.woff2') format('woff2');font-weight:700;font-display:swap}
 :root{
   --bg:#101318; --panel:#171b22; --panel2:#1d222b; --screen:#0b0e12;
   --line:#2a3039; --line2:#3a414d;
   --txt:#eae7e0; --mut:#8c94a3; --mut2:#5b6371;
   --accent:#f0a63c; --accent-dim:#8a6224; --cool:#7fb2d6;
-  --mono:"Cascadia Code","JetBrains Mono",Consolas,"SFMono-Regular",monospace;
-  --sans:"Pretendard Variable",Pretendard,"Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;
+  --mono:"JetBrains Mono","Cascadia Code",Consolas,"SFMono-Regular",monospace;
+  --sans:"Samsung SS Body KR","Pretendard Variable",Pretendard,"Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;
+  --head:"Samsung SS Head KR","Samsung SS Body KR","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.6;word-break:keep-all;overflow-wrap:break-word}
@@ -32,16 +40,16 @@ body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);line
 .slate{height:14px;background:repeating-linear-gradient(-45deg,var(--txt) 0 14px,var(--bg) 14px 28px);opacity:.9}
 header.hero{position:relative;padding:44px 0 12px;border-bottom:1px solid var(--line);margin-bottom:8px}
 .langtog{position:absolute;top:26px;right:0;display:flex;border:1px solid var(--line2);border-radius:999px;overflow:hidden}
-.lt{font-family:var(--mono);font-size:11px;letter-spacing:.12em;padding:6px 13px;background:var(--panel);color:var(--mut);border:0;cursor:pointer;transition:background .15s,color .15s}
+.lt{font-family:var(--head);font-weight:500;font-size:11px;letter-spacing:.12em;padding:6px 13px;background:var(--panel);color:var(--mut);border:0;cursor:pointer;transition:background .15s,color .15s}
 .lt.on{background:var(--accent);color:#181203;font-weight:700}
-.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--accent);text-transform:uppercase;margin:0 0 14px}
-h1{font-size:clamp(28px,4vw,44px);margin:0 0 12px;letter-spacing:-.02em;line-height:1.15;text-wrap:balance}
+.eyebrow{font-family:var(--head);font-weight:500;font-size:11px;letter-spacing:.22em;color:var(--accent);text-transform:uppercase;margin:0 0 14px}
+h1{font-family:var(--head);font-size:clamp(28px,4vw,44px);margin:0 0 12px;letter-spacing:-.02em;line-height:1.15;text-wrap:balance}
 h1 .en{color:var(--mut2);font-weight:700}
 .lede{max-width:640px;color:var(--mut);font-size:15px;margin:0 0 24px}
 .lede b{color:var(--txt);font-weight:600}
 
 .presets{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:18px 0 26px}
-.presets .lb{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--mut2);margin-right:6px}
+.presets .lb{font-family:var(--head);font-weight:500;font-size:11px;letter-spacing:.18em;color:var(--mut2);margin-right:6px}
 .preset{font-family:var(--sans);font-size:13px;color:var(--txt);background:var(--panel);border:1px solid var(--line2);border-radius:999px;padding:7px 16px;cursor:pointer;transition:border-color .15s,background .15s}
 .preset:hover{border-color:var(--accent);background:var(--panel2)}
 .preset:focus-visible,.card:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -50,9 +58,9 @@ h1 .en{color:var(--mut2);font-weight:700}
 
 section.cat{margin:0 0 44px}
 .sec-head{display:flex;gap:14px;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:14px;flex-wrap:wrap}
-.sec-no{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:.1em}
-.sec-head h2{font-size:19px;margin:0;letter-spacing:-.01em}
-.sec-en{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--mut2);text-transform:uppercase}
+.sec-no{font-family:var(--head);font-weight:700;font-size:13px;color:var(--accent);letter-spacing:.1em}
+.sec-head h2{font-family:var(--head);font-size:19px;margin:0;letter-spacing:-.01em}
+.sec-en{font-family:var(--head);font-weight:500;font-size:10.5px;letter-spacing:.2em;color:var(--mut2);text-transform:uppercase}
 .sec-desc{width:100%;margin:2px 0 0;font-size:13px;color:var(--mut)}
 
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
@@ -62,8 +70,8 @@ section.cat{margin:0 0 44px}
 .card.sel::after{content:"";position:absolute;top:7px;right:7px;width:9px;height:9px;border-radius:50%;background:var(--accent)}
 .card .dg{width:100%;height:auto;display:block;background:var(--screen);border-radius:8px 8px 0 0;border-bottom:1px solid var(--line)}
 .card .meta{padding:8px 11px 10px}
-.card .ko{font-size:13.5px;font-weight:600;display:block;line-height:1.35}
-.card .en{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--accent-dim);text-transform:uppercase;display:block;margin:2px 0 4px}
+.card .ko{font-family:var(--head);font-size:13.5px;font-weight:500;display:block;line-height:1.35}
+.card .en{font-family:var(--head);font-weight:500;font-size:9.5px;letter-spacing:.08em;color:var(--accent-dim);text-transform:uppercase;display:block;margin:2px 0 4px}
 .card.sel .en{color:var(--accent)}
 .card .d{font-size:11.5px;color:var(--mut);display:block;line-height:1.45}
 
@@ -71,8 +79,8 @@ section.cat{margin:0 0 44px}
 .mon-top{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--panel2)}
 .rec{width:9px;height:9px;border-radius:50%;background:#e0492e;animation:rec 1.6s ease-in-out infinite}
 @keyframes rec{50%{opacity:.25}}
-.mon-top .t{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--txt)}
-.mon-top .cnt{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--mut)}
+.mon-top .t{font-family:var(--head);font-weight:700;font-size:11px;letter-spacing:.2em;color:var(--txt)}
+.mon-top .cnt{margin-left:auto;font-family:var(--head);font-weight:500;font-size:11px;color:var(--mut)}
 .mon-body{padding:14px}
 .screen{position:relative;background:var(--screen);border:1px solid var(--line2);border-radius:8px;padding:16px 14px;min-height:132px;font-family:var(--mono);font-size:12.5px;line-height:1.75;color:var(--accent);word-break:break-word}
 .screen.empty{color:var(--mut2)}
@@ -82,10 +90,10 @@ section.cat{margin:0 0 44px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
 .chip{display:inline-flex;align-items:center;gap:6px;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:11.5px;color:var(--txt);cursor:pointer}
 .chip:hover{border-color:#a0522d;border-color:var(--line2)}
-.chip .c{color:var(--mut2);font-family:var(--mono);font-size:9.5px;letter-spacing:.06em}
+.chip .c{color:var(--mut2);font-family:var(--head);font-weight:500;font-size:9.5px;letter-spacing:.06em}
 .chip .x{color:var(--mut);font-size:12px}
 .mon-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
-.btn{font-family:var(--sans);font-size:13px;font-weight:600;border-radius:8px;padding:10px 12px;cursor:pointer;border:1px solid var(--line2);background:var(--panel2);color:var(--txt);transition:filter .15s}
+.btn{font-family:var(--head);font-size:13px;font-weight:500;border-radius:8px;padding:10px 12px;cursor:pointer;border:1px solid var(--line2);background:var(--panel2);color:var(--txt);transition:filter .15s}
 .btn:hover{filter:brightness(1.15)}
 .btn.primary{grid-column:1/-1;background:var(--accent);border-color:var(--accent);color:#181203}
 .tip{font-size:11px;color:var(--mut2);margin:12px 0 0}
@@ -93,7 +101,7 @@ section.cat{margin:0 0 44px}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 
 .mbar{display:none;position:fixed;left:0;right:0;bottom:0;background:var(--panel);border-top:1px solid var(--line2);padding:10px 16px;z-index:50;align-items:center;gap:12px}
-.mbar .cnt{font-family:var(--mono);font-size:12px;color:var(--mut)}
+.mbar .cnt{font-family:var(--head);font-weight:500;font-size:12px;color:var(--mut)}
 .mbar .btn{flex:1}
 footer{margin-top:30px;border-top:1px solid var(--line);padding-top:18px;font-size:12px;color:var(--mut2)}
 
@@ -110,7 +118,7 @@ footer{margin-top:30px;border-top:1px solid var(--line);padding-top:18px;font-si
 .dg .wedge{fill:var(--accent);opacity:.16;stroke:var(--accent);stroke-width:1}
 .dg .shade{fill:#2a313c}
 .dg .lit{fill:var(--accent)}
-.dg .tx{font-family:var(--mono);font-size:7.5px;letter-spacing:.06em;fill:var(--mut)}
+.dg .tx{font-family:var(--head);font-weight:500;font-size:7.5px;letter-spacing:.06em;fill:var(--mut)}
 .dg .blur1{filter:blur(1.1px)}
 .dg .blur2{filter:blur(2.2px)}
 
@@ -212,11 +220,11 @@ const CATS=[
  {id:'red',ko:'RED 8K 디지털',en:'RED V-Raptor 8K',d:'초고해상도 디지털. 쨍하고 선명한 광고 룩.',p:'shot on RED V-Raptor 8K, ultra-sharp commercial look',
   svg:S(`<rect x="32" y="18" width="22" height="22" rx="3" class="fg"/><rect x="36" y="12" width="10" height="6" rx="2" class="fgd"/><circle cx="63" cy="29" r="8" class="fgd"/><circle cx="63" cy="29" r="4" class="hl"/>`+TX(48,55,'RED 8K','middle'))},
  {id:'film35',ko:'35mm 필름',en:'35mm Film',d:'따뜻한 그레인과 할레이션. 클래식 시네마 질감.',p:'shot on 35mm Kodak film, organic grain and halation',
-  svg:S(`<rect x="8" y="15" width="80" height="30" rx="2" class="fgd"/>`+holes(17.5)+holes(39.5)+`<rect x="14" y="24" width="30" height="12" class="fg"/><rect x="50" y="24" width="30" height="12" class="fg"/>`+TX(48,55,'35MM','middle'))},
+  svg:S(`<rect x="8" y="15" width="80" height="30" rx="2" class="fgd"/>`+holes(17.5)+holes(39.5)+`<rect x="14" y="24" width="30" height="12" class="fg"/><rect x="50" y="24" width="30" height="12" class="fg"/>`+TX(48,55,'35mm','middle'))},
  {id:'film16',ko:'16mm 필름',en:'16mm Film',d:'거칠고 날것의 질감. 다큐·인디·빈티지 무드.',p:'shot on grainy 16mm film, raw vintage texture',
-  svg:S(`<rect x="12" y="19" width="72" height="22" rx="2" class="fgd"/>`+holes(21)+`<rect x="18" y="27" width="20" height="11" class="fg"/><rect x="44" y="27" width="20" height="11" class="fg"/>`+TX(48,55,'16MM','middle'))},
+  svg:S(`<rect x="12" y="19" width="72" height="22" rx="2" class="fgd"/>`+holes(21)+`<rect x="18" y="27" width="20" height="11" class="fg"/><rect x="44" y="27" width="20" height="11" class="fg"/>`+TX(48,55,'16mm','middle'))},
  {id:'imax',ko:'IMAX 65mm',en:'IMAX 65mm',d:'압도적 스케일과 디테일. 초대형 포맷.',p:'shot on IMAX 65mm film, monumental large-format detail',
-  svg:S(`<rect x="14" y="6" width="68" height="42" rx="2" class="hls"/><rect x="58" y="32" width="22" height="14" rx="1" class="ln"/>`+TX(20,15,'IMAX 65MM','start')+TX(69,42,'35MM','middle'))},
+  svg:S(`<rect x="14" y="6" width="68" height="42" rx="2" class="hls"/><rect x="58" y="32" width="22" height="14" rx="1" class="ln"/>`+TX(20,15,'IMAX 65mm','start')+TX(69,42,'35mm','middle'))},
  {id:'vhs',ko:'빈티지 캠코더',en:'VHS Camcorder',d:'노이즈와 색번짐. 레트로 홈비디오 감성.',p:'vintage VHS camcorder footage, analog noise and chromatic bleed',
   svg:S(`<rect x="18" y="14" width="60" height="30" rx="3" class="fgd"/><circle cx="34" cy="29" r="6.5" class="fg"/><circle cx="62" cy="29" r="6.5" class="fg"/><rect x="41" y="26" width="14" height="6" class="fg"/>`+TX(48,55,'VHS·REC','middle'))},
  {id:'drone',ko:'드론 항공 촬영',en:'Aerial Drone',d:'공중 부감 스케일. 지형과 도시를 한눈에.',p:'cinematic aerial drone footage',
@@ -262,15 +270,15 @@ const CATS=[
  {id:'fish',ko:'어안 렌즈',en:'Fisheye 8mm',d:'180°에 육박하는 왜곡. 초현실·익스트림.',p:'fisheye lens, extreme barrel distortion',
   svg:S(FR+`<path d="M6 17 Q48 5 90 17 M6 30 H90 M6 43 Q48 55 90 43 M30 5 Q22 30 30 55 M66 5 Q74 30 66 55 M48 4 V56" class="ln"/>`)},
  {id:'uw14',ko:'초광각 14mm',en:'Ultra-wide 14mm',d:'공간을 극적으로 넓게. 웅장한 원근감.',p:'14mm ultra-wide-angle lens, expansive perspective',
-  svg:S(CAM(14,30)+wedge(3,57)+TX(88,14,'14MM'))},
+  svg:S(CAM(14,30)+wedge(3,57)+TX(88,14,'14mm'))},
  {id:'w24',ko:'광각 24mm',en:'Wide 24mm',d:'넓은 시야와 자연스러움. 풍경·공간 소개.',p:'24mm wide-angle lens',
-  svg:S(CAM(14,30)+wedge(12,48)+TX(88,14,'24MM'))},
+  svg:S(CAM(14,30)+wedge(12,48)+TX(88,14,'24mm'))},
  {id:'n50',ko:'표준 50mm',en:'Standard 50mm',d:'사람 눈과 비슷한 원근. 담백하고 사실적.',p:'50mm standard lens, natural human-eye perspective',
-  svg:S(CAM(14,30)+wedge(20.5,39.5)+TX(88,14,'50MM'))},
+  svg:S(CAM(14,30)+wedge(20.5,39.5)+TX(88,14,'50mm'))},
  {id:'p85',ko:'인물 망원 85mm',en:'Portrait 85mm',d:'인물 전용 화각. 배경 압축, 얼굴 왜곡 없음.',p:'85mm portrait lens, flattering compression',
-  svg:S(CAM(14,30)+wedge(25,35)+TX(88,14,'85MM'))},
+  svg:S(CAM(14,30)+wedge(25,35)+TX(88,14,'85mm'))},
  {id:'t200',ko:'초망원 200mm',en:'Telephoto 200mm',d:'멀리서 당겨 찍기. 공간이 납작하게 압축.',p:'200mm telephoto lens, compressed layers of depth',
-  svg:S(CAM(14,30)+wedge(27.8,32.2)+TX(88,14,'200MM'))},
+  svg:S(CAM(14,30)+wedge(27.8,32.2)+TX(88,14,'200mm'))},
  {id:'macro',ko:'마크로 렌즈',en:'Macro',d:'아주 작은 피사체를 화면 가득. 질감 극대화.',p:'macro lens, extreme magnification of tiny details',
   svg:S(CAM(18,30)+`<line x1="28" y1="30" x2="42" y2="30" class="sight"/><circle cx="62" cy="30" r="17" class="fg"/><circle cx="62" cy="30" r="7.5" class="hl"/>`+TX(88,14,'MACRO'))},
  {id:'ana',ko:'아나모픽',en:'Anamorphic',d:'타원 보케와 수평 플레어. 시네마스코프 룩.',p:'anamorphic lens, oval bokeh and horizontal lens flares',
